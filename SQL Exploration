@@ -1,0 +1,126 @@
+The following data set is about is from a hospital in the U.S 
+I Manipulated the data through SQL to show how despite popular belief patients are treated equally at this particular hospital.Dataset #7 brought us data that mimicked that of an Emergency Room in a Hospital. 
+
+
+-- Select data that we are going to be working on
+
+SELECT	*
+FROM  Portfolio.dbo.Hospital
+
+--Dropping columns that I won’t be using
+
+ALTER TABLE Portfolio.dbo.Hospital
+DROP COLUMN patient_sat_score
+ALTER TABLE Portfolio.dbo.Hospital
+DROP COLUMN patient_first_inital
+
+-- Changing M to Males and F to Females 
+
+UPDATE Portfolio.dbo.Hospital
+SET patient_gender='Male'
+WHERE patient_gender='M'
+
+UPDATE Portfolio.dbo.Hospital
+SET patient_gender='Female'
+WHERE patient_gender='F'
+
+
+Separating the hours in the date column and set it as a Date column
+
+Select dateConverted,Convert(Date,date)
+FROM  Portfolio.dbo.Hospital
+
+UPDATE Portfolio.dbo.Hospital
+SET date=Convert(Date,date)
+
+ALTER TABLE Portfolio.dbo.Hospital
+ADD dateConverted Date;
+
+UPDATE Portfolio.dbo.Hospital
+SET dateConverted= Convert(Date,date)
+
+SELECT	*
+FROM  Portfolio.dbo.Hospital
+ALTER TABLE Portfolio.dbo.Hospital
+DROP COLUMN date;
+
+Changing Column names 
+ALTER TABLE Portfolio.dbo.Hospital
+RENAME COLUMN patient_gender to Patient Gender;
+
+Find Average Patient wait time 
+
+SELECT AVG(patient_waittime)
+FROM Portfolio.dbo.Hospital;
+
+
+
+
+Amount of White People over the Average Patient wait time
+
+SELECT COUNT(patient_waittime)
+FROM Portfolio.dbo.Hospital
+WHERE patient_waittime > 35 AND patient_race='White
+
+
+Find Average age of patients
+
+SELECT AVG(patient_age)
+FROM Portfolio.dbo.Hospital;
+
+
+Amount of African American patients older than 35
+
+SELECT COUNT(patient_age)
+FROM Portfolio.dbo.Hospital
+WHERE patient_age> 35 AND patient_race='African American'
+
+Amount of Male and Female Patients
+
+SELECT COUNT(patient_gender)
+FROM Portfolio.dbo.Hospital
+Where patient_gender='Male';
+
+SELECT COUNT(patient_gender)
+FROM Portfolio.dbo.Hospital
+Where patient_gender='Female';
+
+
+Amount of Male and Female patient wait time over 35
+
+SELECT COUNT(patient_gender)
+FROM Portfolio.dbo.Hospital
+WHERE patient_gender = 'Male' AND patient_waittime > 35
+
+SELECT COUNT(patient_gender)
+FROM Portfolio.dbo.Hospital
+WHERE patient_gender = 'Female' AND patient_waittime > 35
+
+Comparing wait time for cardiology and General Practice patients
+
+Select Count (patient_waittime)
+FROM Portfolio.dbo.Hospital
+WHERE department_referral = 'General Practice' AND patient_waittime > 35
+
+Select Count (patient_waittime)
+FROM Portfolio.dbo.Hospital
+WHERE department_referral = 'Cardiology' AND patient_waittime > 35
+
+
+
+
+
+CREATING TABLE INEQUALITY
+
+AA over average wait time int,
+WP over average wait time int
+AA over 35 int
+MP over 35 int
+WP over 35
+Cardiology average wait time int
+General Practice average wait time int
+Gender varchar (50)
+
+INSERT INTO INEQUALITY  VALUES
+(983,1274,1081,2370, 120, 915, Male
+
